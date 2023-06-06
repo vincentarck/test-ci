@@ -26,27 +26,24 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+#       - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
-      - name: Install Dependencies and Build
-        run: |
-          npm install
-          npm run build
+#       - name: Install Dependencies and Build
+#         run: |
+#           npm install
+#           npm run build
 
-      - name: Log Secret Variable
-        run: | 
-          echo "Secret Value:${{ secrets.SSH_PRIVATE_KEY }}"
-          echo "Secret Host:${{ secrets.SERVER_HOST }}"
-          echo "Secret Host:${{ secrets.SERVER_PASSWORD }}"
-          echo "Secret Host:${{ secrets.SERVER_USERNAME }}"
-            
-      - name: Deploy to server
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          password: ${{ secrets.SERVER_PASSWORD }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: dist/
-          target: /usr/share/nginx/html/dashboard-monitoring/ads-monitoring;
+      - name: makesure dist are available
+        run: |
+          ls -l dist/ 
+        
+#       - name: Deploy to server
+#         uses: appleboy/scp-action@master
+#         with:
+#           host: ${{ secrets.SERVER_HOST }}
+#           username: ${{ secrets.SERVER_USERNAME }}
+#           password: ${{ secrets.SERVER_PASSWORD }}
+#           key: ${{ secrets.SSH_PRIVATE_KEY }}
+#           source: dist/
+#           target: /usr/share/nginx/html/dashboard-monitoring/ads-monitoring;
