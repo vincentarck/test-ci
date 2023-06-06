@@ -37,5 +37,6 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
+          key: ${{ secretes.SSH_PRIVATE_KEY }}
           source: dist/
           target: /usr/share/nginx/html/dashboard-monitoring/ads-monitoring;
