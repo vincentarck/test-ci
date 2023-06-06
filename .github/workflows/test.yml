@@ -9,10 +9,6 @@ on:
       - main
   workflow_dispatch:
 
-env:
-  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-  KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,13 +16,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
-      - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh/
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts
 
       - name: Install dependencies and build
         run: |
@@ -40,5 +29,6 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
           source: build/
           target: /usr/share/nginx/html/dashboard-monitoring/ads-monitoring
